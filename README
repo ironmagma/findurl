@@ -1,2 +1,21 @@
+== What is this? ==
+
+findurl is a python module that allows you to find URLs (be they formal or casually typed)
+in a block of text. It also features an inherently up-to-date URL regular expresson, which
+can be either computed on-the-fly (via scraping IANA and/or Wikipedia) or at build-time.
+
+== Documentation ==
+
+The module itself is pretty short and self-explanatory, at this point in time. As the module
+grows, however, I will add some formal documentation.
+
+== What's not supported (yet) ==
+
+* IP detection (although the regexes are there if you want to use them yourself)
+* scraping Wikipedia
+* punycode TLDs
+* option to use things like [aA] instead of requiring re.IGNORECASE be used
+
 == Contact ==
+
 carniojack424@gmail.com

@@ -199,7 +199,7 @@ def getSchemes():
             'rtmp', 
             'secondlife', 
             'sgn', 
-            'skype ', 
+            'skype', 
             'spotify', 
             'ssh', 
             'sftp', 
