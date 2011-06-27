@@ -1,4 +1,4 @@
 # Requires cog
 # http://nedbatchelder.com/code/cog/
 
-cog.py -r findurl.py
+find ./src -name "*.py" -print0 | xargs -0 cog.py -r
