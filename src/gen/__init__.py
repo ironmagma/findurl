@@ -44,7 +44,7 @@ sys.path.append(
 def genRegexString(useStaticTLDTuple = False):
    # Join everything into a regex-compatible string
 
-   if useStaticTLDList:
+   if useStaticTLDTuple:
        import static
        tlds = static.getTLDTuple()
    else:
