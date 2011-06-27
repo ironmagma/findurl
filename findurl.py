@@ -233,12 +233,25 @@ def getSchemes():
 
     #return d
 
-    def linkifyURLs(text):
+    def linkifyURLs(text, useStatic = False):
         import re
 
-        r = generateRegex()
+        if useStatic:
+            r = getStaticRegex()
+        else:
+            r = generateRegex()
+
         r = r"(?<=\b)" + r + r"(?=\b)" # Add some lookahead/lookbehind
 
         m=re.compile(r, flags=re.IGNORECASE)
 
         return re.sub(m, r'<a href="\1">\1</a>', text) # FIXME escape quotation marks in \1
+
+    def getStaticRegex():
+        #[[[cog
+            import findurl
+            cog.outl("return "+findurl.generateRegex())
+        #]]]
+        return ((aaa|aaas|acap|cap|cid|crid|data|dav|dict|dns|fax|file|ftp|geo|go|gopher|h323|http|https|iax|icap|im|imap|info|ipp|iris|iris.beep|iris.xpc|iris.xpcs|iris.lws|ldap|lsid|mailto|mid|modem|msrp|msrps|mtqp|mupdate|news|nfs|nntp|opaquelocktoken|pop|pres|prospero|rsync|rtsp|service|shttp|sieve|sip|sips|sms|snmp|soap.beep|soap.beeps|tag|tel|telnet|tftp|thismessage|tip|tv|urn|vemmi|wais|xmlrpc.beep|xmlrpc.beeps|xmpp|z39.50r|z39.50s|about|adiumxtra|aim|apt|afp|aw|bitcoin|bolo|callto|chrome|coap|content|cvs|doi|ed2k|facetime|feed|finger|fish|git|gg|gizmoproject|gtalk|irc|ircs|irc6|itms|jar|javascript|keyparc|lastfm|ldaps|magnet|maps|mms|msnim|mumble|mvn|notes|palm|paparazzi|psyc|rmi|rtmp|secondlife|sgn|skype|spotify|ssh|sftp|smb|soldat|steam|svn|teamspeak|things|unreal|ut2004|ventrilo|view-source|webcal|ws|wss|wtai|wyciwyg|xfire|xri|ymsgr)://([a-zA-Z0-9\-\.](\:[a-zA-Z0-9\-\.])?@)?([a-zA-Z][a-zA-Z0-9\-\.]*\.)+(AC|AD|AE|AERO|AF|AG|AI|AL|AM|AN|AO|AQ|AR|ARPA|AS|ASIA|AT|AU|AW|AX|AZ|BA|BB|BD|BE|BF|BG|BH|BI|BIZ|BJ|BM|BN|BO|BR|BS|BT|BV|BW|BY|BZ|CA|CAT|CC|CD|CF|CG|CH|CI|CK|CL|CM|CN|CO|COM|COOP|CR|CU|CV|CX|CY|CZ|DE|DJ|DK|DM|DO|DZ|EC|EDU|EE|EG|ER|ES|ET|EU|FI|FJ|FK|FM|FO|FR|GA|GB|GD|GE|GF|GG|GH|GI|GL|GM|GN|GOV|GP|GQ|GR|GS|GT|GU|GW|GY|HK|HM|HN|HR|HT|HU|ID|IE|IL|IM|IN|INFO|INT|IO|IQ|IR|IS|IT|JE|JM|JO|JOBS|JP|KE|KG|KH|KI|KM|KN|KP|KR|KW|KY|KZ|LA|LB|LC|LI|LK|LR|LS|LT|LU|LV|LY|MA|MC|MD|ME|MG|MH|MIL|MK|ML|MM|MN|MO|MOBI|MP|MQ|MR|MS|MT|MU|MUSEUM|MV|MW|MX|MY|MZ|NA|NAME|NC|NE|NET|NF|NG|NI|NL|NO|NP|NR|NU|NZ|OM|ORG|PA|PE|PF|PG|PH|PK|PL|PM|PN|PR|PRO|PS|PT|PW|PY|QA|RE|RO|RS|RU|RW|SA|SB|SC|SD|SE|SG|SH|SI|SJ|SK|SL|SM|SN|SO|SR|ST|SU|SV|SY|SZ|TC|TD|TEL|TF|TG|TH|TJ|TK|TL|TM|TN|TO|TP|TR|TRAVEL|TT|TV|TW|TZ|UA|UG|UK|US|UY|UZ|VA|VC|VE|VG|VI|VN|VU|WF|WS|XXX|YE|YT|ZA|ZM|ZW)(/[^\s]*)?(#[^\s]*)?)
+        #[[[end]]]
+        
