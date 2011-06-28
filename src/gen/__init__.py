@@ -73,7 +73,7 @@ def genRegexString(useStaticTLDTuple = False):
    withscheme = schmreg+r"://"+meat 
    withscheme = "("+withscheme+")"
 
-   return withscheme
+   return "("+withscheme+"|"+withoutscheme+")"
 
 def genTLDTuple():
    return tuple(genTLDIter())
@@ -102,7 +102,6 @@ def genTLDIter():
    tlds = itertools.ifilter(lambda x: x != '', tlds)
 
    return tlds
-
 
 
 def genSchemes():
