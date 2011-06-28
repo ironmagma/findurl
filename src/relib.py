@@ -4,14 +4,20 @@ def intoparts(regex, string):
     lastfind = 0
 
     while True:
-        search = r.search(string, lastfind)
+        search = regex.search(string, lastfind)
+
+        lastlastfind = lastfind
+
+        if search is not None:
+            lastfind = search.start()
+        else:
+            lastfind = None
+
+        yield string[lastlastfind:lastfind]
+
         if search is None:
             return
 
-        lastlastfind = lastfind
-        lastfind = search.start()
-
-        yield string[lastlastfind:lastfind]
         yield string[lastfind:lastfind+len(search.group(0))]
 
         lastfind += len(search.group(0))

@@ -55,10 +55,18 @@ def genRegexString(useStaticTLDTuple = False):
    schemes = genSchemes()
    schmreg = "("+"|".join(schemes)+")"
 
+
    validbody = r"[a-zA-Z0-9\-\.]"
+   invalidbody = "[^"+validbody[1:]
+
    validstart = r"[a-zA-Z]"
-   validmeat = "[^\s]"
-   meat = r"(%s(\:%s)?@)?(%s%s*\.)+" % (validbody, validbody, validstart, validbody) + tldreg + "(/" + validmeat + "*)?(#" + validmeat + "*)?"
+   validmeat = r"[^\s]"
+    
+   validhash = "(#" + validmeat +"*)?"
+
+   meat = r"(%s(\:%s)?@)?(%s%s*\.)+" % (validbody, validbody, validstart, validbody) +  \
+            tldreg + \
+                "((/" + validmeat + "*" + validhash + ")|("+validhash+"(?=" +invalidbody+ ")))"
 
    withoutscheme = "("+meat+")" 
 
@@ -77,6 +85,7 @@ def genTLDIter():
    """Scrape the list of TLDs from IANA"""
 
    import urllib, itertools
+   from re import escape
 
    tlds = iter(urllib.urlopen("http://data.iana.org/TLD/tlds-alpha-by-domain.txt").read().replace('\r\n', '\n').split('\n'))
    
@@ -101,7 +110,7 @@ def genSchemes():
 
     # Too much work for now, just return a static tuple
 
-    return ('aaa', 
+    schemes=('aaa', 
             'aaas', 
             'acap', 
             'cap', 
@@ -241,6 +250,10 @@ def genSchemes():
             'xfire', 
             'xri', 
             'ymsgr')
+
+    from re import escape
+
+    return map(escape, schemes)
 
     #import urllib, itertools, xml.dom.minidom as xml
 
