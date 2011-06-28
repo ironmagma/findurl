@@ -50,7 +50,7 @@ def linkifyURLs(text, useStatic = False):
         import gen
         r = gen.genRegexString()
 
-    r = r"(?<=\b)" + r + r"(?=\b)" # Add some lookahead/lookbehind
+    r = r"(?<=\b)" + r + r"(?=($|\b))" # Add some lookahead/lookbehind
 
     m = re.compile(r, flags=re.IGNORECASE)
 

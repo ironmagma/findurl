@@ -95,21 +95,6 @@ def genTLDIter():
    return tlds
 
 
-def linkifyURLs(text, useStatic = False):
-    import re
-
-    if useStatic:
-        r = getStaticRegex()
-    else:
-        r = genRegexString()
-
-    r = r"(?<=\b)" + r + r"(?=\b)" # Add some lookahead/lookbehind
-
-    m = re.compile(r, flags=re.IGNORECASE)
-
-    return re.sub(m, r'<a href="\1">\1</a>', text) # FIXME escape quotation marks in \1
-
-    
 
 def genSchemes():
     """Scrape a list of URL schemes from Wikipedia."""
