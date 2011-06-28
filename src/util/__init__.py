@@ -40,7 +40,7 @@ sys.path.append(
 
 # End terrors from the deep
 
-def linkifyURLs(text, useStatic = True):
+def findURLsInText(text, useStatic = True):
     import re
     import relib
 
@@ -51,27 +51,12 @@ def linkifyURLs(text, useStatic = True):
         import gen
         r = gen.genRegexString()
 
-    r = r"(?<=\b)" + r + r"(?=($|\b))" # Add some lookahead/lookbehind
-
     m = re.compile(r, flags=re.IGNORECASE)
 
     # FIXME escape quotation marks in \1
 
-    res = relib.intoparts(m, text)
+    return relib.intoparts(m, text)
 
-    onOdd = False
-    res_list = []
-
-    for part in res:
-        onOdd = not onOdd
-        
-        if onOdd:
-            res_list.append(part)
-        else:
-            res_list.append("<a href=\""+part+"\">"+part+"</a>")
-
-    return res_list
-    
 
 # import gen
 # import re
