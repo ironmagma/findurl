@@ -65,7 +65,7 @@ def genRegexString(useStaticTLDTuple = False):
    validhash = "(#" + validmeat +"*)?"
 
    meat = r"(%s(\:%s)?@)?(%s%s*\.)+" % (validbody, validbody, validstart, validbody) +  \
-            tldreg + \
+            tldreg + r"(?::\d+)?" \
                 "((/" + validmeat + "*" + validhash + ")|("+validhash+"(?=" +invalidbody+ ")))"
 
    withoutscheme = "("+meat+")" 
